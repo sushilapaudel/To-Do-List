@@ -374,7 +374,7 @@ if st.session_state.user_name:
         
         with col2:
             priority = st.selectbox("🎯 Priority", 
-                                   ["High", "Medium", "Low"], 
+                                   ["High Priority", "Medium Priority", "Low Priority"], 
                                    key="priority_input",
                                    label_visibility="collapsed")
         
