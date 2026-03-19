@@ -510,27 +510,28 @@ div[data-testid="column"]:nth-of-type(4) .stButton > button {
         flex-wrap: wrap !important;
         margin-bottom: 10px !important;
     }
-    
-    /* Priority dropdown options - WHITE TEXT */
+            
+    /* Priority dropdown options */
     .stSelectbox select option {
         color: #ffffff !important;
         font-weight: 500 !important;
+        background-color: #b45f6b !important;  /* Default pink */
     }
 
     .stSelectbox select option[value="High"] {
-    background-color: #ff6b6b !important;  /* Red for high */
-    color: white !important;
+        background-color: #ff6b6b !important;  /* Red for high */
+        color: white !important;
     }
 
     .stSelectbox select option[value="Medium"] {
-    background-color: #ffb347 !important;  /* Orange for medium */
-    color: white !important;
+        background-color: #ffb347 !important;  /* Orange for medium */
+        color: white !important;
     }
 
     .stSelectbox select option[value="Low"] {
-    background-color: #6b8e6b !important;  /* Green for low */
-    color: white !important;
-    }
+        background-color: #6b8e6b !important;  /* Green for low */
+        color: white !important;
+    }   
     
     /* Remove all animations and shadows */
     * {
