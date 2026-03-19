@@ -530,7 +530,24 @@ div[data-testid="column"]:nth-of-type(4) .stButton > button {
     .stSelectbox select option[value="Low Priority"] {
         background-color: #6b8e6b !important;  /* Green for low */
         color: #ffffff !important;
-    }   
+    }  
+    /* Hide priority dropdown on mobile */
+    div[data-testid="column"]:nth-of-type(2) {
+        display: none !important;
+    }
+
+    /* Adjust the remaining columns to fill space */
+    div[data-testid="column"]:nth-of-type(1) {
+        width: 60% !important;
+    }
+
+    div[data-testid="column"]:nth-of-type(3) {
+        width: 20% !important;
+    }
+
+    div[data-testid="column"]:nth-of-type(4) {
+        width: 20% !important;
+    }       
     
     /* Remove all animations and shadows */
     * {
