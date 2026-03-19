@@ -101,7 +101,7 @@ def load_tasks(user_name):
     return tasks
 
 # ----------------------------
-# Custom CSS - Girly Edition + Mobile Friendly
+# Custom CSS - Laptop (Pink Gradients) + Mobile (Clean White Background)
 # ----------------------------
 st.markdown("""
 <style>
@@ -110,6 +110,7 @@ st.markdown("""
 /* Viewport for mobile */
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
 
+/* ===== LAPTOP STYLES (Default) - Pink Gradients ===== */
 .stApp {
     background: linear-gradient(135deg, #fff5f7 0%, #ffe4e9 100%);
     font-family: 'Quicksand', sans-serif;
@@ -123,8 +124,6 @@ st.markdown("""
     text-align: center;
     text-shadow: 3px 3px 6px rgba(255, 255, 255, 0.8);
     letter-spacing: 1px;
-    background: none;
-    -webkit-text-fill-color: initial;
 }
 
 .greet-box {
@@ -208,16 +207,16 @@ st.markdown("""
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 8px;
-    color: #5e5e5e;
+    color: #2d2d2d;
 }
 
 .small-text {
     font-size: 16px;
-    color: #888;
+    color: #555555;
     font-weight: 400;
 }
 
-/* Input fields - FIXED for mobile visibility */
+/* Input fields */
 .stTextInput > div > div > input,
 .stSelectbox > div > div > select,
 .stTextarea > div > div > textarea {
@@ -227,8 +226,7 @@ st.markdown("""
     font-size: 18px !important;
     background-color: white !important;
     font-family: 'Quicksand', sans-serif !important;
-    color: #333333 !important;  /* Dark gray for visibility */
-    -webkit-text-fill-color: #333333 !important;  /* For iOS */
+    color: #000000 !important;
 }
 
 /* Placeholder text */
@@ -245,7 +243,6 @@ st.markdown("""
     padding: 15px 20px !important;
     font-size: 16px !important;
     background-color: white !important;
-    font-family: 'Quicksand', sans-serif !important;
 }
 
 .stCheckbox {
@@ -328,7 +325,7 @@ div[data-testid="column"]:nth-of-type(4) .stButton > button {
     font-size: 14px;
     font-weight: 600;
     margin-left: 10px;
-    color: #4a4a4a;
+    color: #2d2d2d;
 }
 
 /* Emoji decorations */
@@ -339,72 +336,152 @@ div[data-testid="column"]:nth-of-type(4) .stButton > button {
     opacity: 0.7;
 }
 
-/* ===== MOBILE RESPONSIVE FIXES ===== */
+/* ===== MOBILE STYLES - Clean White Background with Dark Text ===== */
 @media only screen and (max-width: 768px) {
+    /* Clean white background */
+    .stApp {
+        background: #ffffff !important;
+    }
+    
+    /* Dark text for all elements */
     .main-title {
         font-size: 36px !important;
+        color: #d44e6c !important;
         margin-bottom: 20px !important;
+        text-shadow: none !important;
     }
     
     .greet-box {
+        background: #f8f8f8 !important;
+        color: #333333 !important;
+        border: 2px solid #ffb6c1 !important;
         font-size: 18px !important;
         padding: 15px 20px !important;
-        margin-bottom: 20px !important;
-    }
-    
-    .task-card {
-        padding: 15px 20px !important;
-        margin-bottom: 15px !important;
-    }
-    
-    .task-text {
-        font-size: 18px !important;
-    }
-    
-    .small-text {
-        font-size: 14px !important;
+        box-shadow: none !important;
+        animation: none !important;
     }
     
     .metric-pill {
         font-size: 16px !important;
         padding: 10px !important;
+        color: #222222 !important;
+        border: 1px solid #dddddd !important;
+        box-shadow: none !important;
         min-width: 80px !important;
     }
     
-    .add-task-container {
-        padding: 15px !important;
+    .metric-pill:hover {
+        transform: none !important;
     }
     
+    .pending-pill {
+        background: #fff3e0 !important;
+        color: #663d00 !important;
+    }
+    
+    .completed-pill {
+        background: #e8f5e8 !important;
+        color: #1d4a1d !important;
+    }
+    
+    .deleted-pill {
+        background: #ffe8e8 !important;
+        color: #a13a3a !important;
+    }
+    
+    .task-card {
+        background: #fafafa !important;
+        border: 1px solid #ffb6c1 !important;
+        padding: 15px 20px !important;
+        color: #222222 !important;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important;
+    }
+    
+    .task-card:hover {
+        transform: none !important;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important;
+    }
+    
+    .pinned-task {
+        background: #fff9e6 !important;
+        border: 2px solid #ffd700 !important;
+        box-shadow: none !important;
+    }
+    
+    .task-text {
+        font-size: 18px !important;
+        color: #000000 !important;
+    }
+    
+    .small-text {
+        font-size: 14px !important;
+        color: #444444 !important;
+    }
+    
+    /* Input fields - maximum visibility */
+    .stTextInput > div > div > input,
+    .stSelectbox > div > div > select {
+        background-color: #ffffff !important;
+        border: 2px solid #ffb6c1 !important;
+        color: #000000 !important;
+        font-size: 16px !important;
+        box-shadow: none !important;
+    }
+    
+    .stTextInput input::placeholder {
+        color: #888888 !important;
+    }
+    
+    /* Section titles */
     .section-title {
         font-size: 24px !important;
+        color: #b45f6b !important;
+        background: transparent !important;
+        text-shadow: none !important;
         margin-bottom: 15px !important;
     }
     
-    /* Force ALL text to be dark and visible on mobile */
-    .stTextInput > div > div > input,
-    .stSelectbox > div > div > select,
-    .stTextarea > div > div > textarea,
-    .stMarkdown,
-    p, span, div, label {
-        color: #333333 !important;
-        -webkit-text-fill-color: #333333 !important;
+    /* Add task container */
+    .add-task-container {
+        background: #f8f8f8 !important;
+        border: 1px solid #ffb6c1 !important;
+        padding: 15px !important;
+        box-shadow: none !important;
+        border-radius: 30px !important;
     }
     
-    /* Keep button text white though */
-    .stButton > button,
-    .stButton > button span {
-        color: white !important;
-        -webkit-text-fill-color: white !important;
-    }
-    
-    /* Input fields - extra mobile fixes */
-    .stTextInput input, 
-    .stSelectbox select, 
-    .stTextarea textarea {
-        font-size: 16px !important;  /* Prevents zoom on iOS */
+    /* Priority badges on mobile */
+    .priority-badge {
+        background-color: #f0f0f0 !important;
         color: #000000 !important;
-        background-color: #ffffff !important;
-        border: 2px solid #ffb6c1 !important;
+        font-size: 12px !important;
+        border: 1px solid #dddddd !important;
+        padding: 3px 10px !important;
+    }
+    
+    /* Flower decorations */
+    .flower-decoration {
+        font-size: 16px !important;
+        color: #888888 !important;
+        opacity: 1 !important;
+    }
+    
+    /* All text elements */
+    .stMarkdown, p, span, div, label {
+        color: #222222 !important;
+    }
+    
+    /* Checkbox label */
+    .stCheckbox label {
+        color: #b45f6b !important;
+        font-size: 16px !important;
+    }
+    
+    /* Warning/info messages */
+    .stAlert {
+        background: #f0f0f0 !important;
+        color: #222222 !important;
+        border: 1px solid #ffb6c1 !important;
     }
     
     /* Make buttons bigger and easier to tap */
@@ -414,11 +491,18 @@ div[data-testid="column"]:nth-of-type(4) .stButton > button {
         min-height: 50px !important;
         width: 100% !important;
         margin: 5px 0 !important;
+        box-shadow: none !important;
     }
     
-    /* Better spacing for stacked columns */
-    .row-widget.stButton {
-        margin-bottom: 10px !important;
+    .stButton > button:hover {
+        transform: none !important;
+    }
+    
+    /* Add task button */
+    div[data-testid="column"]:nth-of-type(4) .stButton > button {
+        font-size: 16px !important;
+        padding: 12px !important;
+        margin-top: 0 !important;
     }
     
     /* Fix column stacking */
@@ -427,38 +511,17 @@ div[data-testid="column"]:nth-of-type(4) .stButton > button {
         margin-bottom: 10px !important;
     }
     
-    /* Make checkbox labels visible */
-    .stCheckbox label {
-        color: #b45f6b !important;
-        font-size: 16px !important;
-    }
-    
     /* Ensure dropdown options are visible */
     .stSelectbox select option {
         color: #000000 !important;
         background-color: #ffffff !important;
     }
     
-    /* Fix for any white text issues */
+    /* Remove all animations and shadows */
     * {
         -webkit-text-size-adjust: 100%;
-    }
-    
-    /* Flower decorations smaller on mobile */
-    .flower-decoration {
-        font-size: 16px !important;
-    }
-    
-    /* Add task button specific */
-    div[data-testid="column"]:nth-of-type(4) .stButton > button {
-        font-size: 16px !important;
-        padding: 12px !important;
-    }
-    
-    /* Priority badge text on mobile */
-    .priority-badge {
-        font-size: 12px !important;
-        padding: 3px 10px !important;
+        animation: none !important;
+        text-shadow: none !important;
     }
 }
 
@@ -483,16 +546,14 @@ div[data-testid="column"]:nth-of-type(4) .stButton > button {
         min-width: 70px !important;
     }
     
-    /* Stack buttons vertically on very small screens */
-    .stButton > button {
-        font-size: 14px !important;
-        padding: 12px !important;
+    .section-title {
+        font-size: 20px !important;
     }
     
-    /* Priority badge on very small screens */
     .priority-badge {
         font-size: 10px !important;
-        padding: 2px 8px !important;
+        padding: 2px 6px !important;
+        margin-left: 5px !important;
     }
 }
 </style>
@@ -547,7 +608,7 @@ if st.session_state.user_name:
         
         with col2:
             priority = st.selectbox("🎯 Priority", 
-                                   ["High", "Medium", "Low"], 
+                                   ["High Priority", "Medium Priority", "Low Priority"], 
                                    key="priority_input",
                                    label_visibility="collapsed")
         
