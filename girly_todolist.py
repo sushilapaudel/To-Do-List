@@ -515,22 +515,21 @@ div[data-testid="column"]:nth-of-type(4) .stButton > button {
     .stSelectbox select option {
         color: #ffffff !important;
         font-weight: 500 !important;
-        background-color: #b45f6b !important;  /* Default pink */
     }
 
-    .stSelectbox select option[value="High"] {
+    .stSelectbox select option[value="High Proiority"] {
         background-color: #ff6b6b !important;  /* Red for high */
-        color: white !important;
+        color: #ffffff !important;
     }
 
-    .stSelectbox select option[value="Medium"] {
+    .stSelectbox select option[value="Medium Priority"] {
         background-color: #ffb347 !important;  /* Orange for medium */
-        color: white !important;
+        color: #ffffff !important;
     }
 
-    .stSelectbox select option[value="Low"] {
+    .stSelectbox select option[value="Low Priority"] {
         background-color: #6b8e6b !important;  /* Green for low */
-        color: white !important;
+        color: #ffffff !important;
     }   
     
     /* Remove all animations and shadows */
