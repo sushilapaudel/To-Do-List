@@ -511,10 +511,25 @@ div[data-testid="column"]:nth-of-type(4) .stButton > button {
         margin-bottom: 10px !important;
     }
     
-    /* Ensure dropdown options are visible */
+    /* Priority dropdown options - WHITE TEXT */
     .stSelectbox select option {
-        color: #000000 !important;
-        background-color: #ffffff !important;
+        color: #ffffff !important;
+        font-weight: 500 !important;
+    }
+
+    .stSelectbox select option[value="High"] {
+    background-color: #ff6b6b !important;  /* Red for high */
+    color: white !important;
+    }
+
+    .stSelectbox select option[value="Medium"] {
+    background-color: #ffb347 !important;  /* Orange for medium */
+    color: white !important;
+    }
+
+    .stSelectbox select option[value="Low"] {
+    background-color: #6b8e6b !important;  /* Green for low */
+    color: white !important;
     }
     
     /* Remove all animations and shadows */
