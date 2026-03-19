@@ -13,7 +13,6 @@ CREATE TABLE IF NOT EXISTS tasks (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_name TEXT,
     task TEXT,
-    priority TEXT,
     pinned INTEGER,
     completed INTEGER
 )
@@ -55,35 +54,18 @@ def get_message(name):
     ]
     return random.choice(messages)
 
-def priority_symbol(priority):
-    if priority == "High":
-        return "🔴"
-    elif priority == "Medium":
-        return "🟡"
-    return "🟢"
-
-def priority_color(priority):
-    colors = {
-        "High": "#ffb3b3",  # soft pink-red
-        "Medium": "#fff2b3",  # soft yellow
-        "Low": "#b3e0b3"  # soft green
-    }
-    return colors.get(priority, "#ffffff")
-
 def sort_tasks(tasks):
-    priority_order = {"High": 0, "Medium": 1, "Low": 2}
     return sorted(
         tasks,
         key=lambda x: (
             not x["pinned"],
-            x["completed"],
-            priority_order.get(x["priority"], 3)
+            x["completed"]
         )
     )
 
 def load_tasks(user_name):
     c.execute(
-        "SELECT id, user_name, task, priority, pinned, completed FROM tasks WHERE user_name = ?",
+        "SELECT id, user_name, task, pinned, completed FROM tasks WHERE user_name = ?",
         (user_name,)
     )
     rows = c.fetchall()
@@ -94,9 +76,8 @@ def load_tasks(user_name):
             "id": row[0],
             "user_name": row[1],
             "task": row[2],
-            "priority": row[3],
-            "pinned": bool(row[4]),
-            "completed": bool(row[5])
+            "pinned": bool(row[3]),
+            "completed": bool(row[4])
         })
     return tasks
 
@@ -217,9 +198,7 @@ st.markdown("""
 }
 
 /* Input fields */
-.stTextInput > div > div > input,
-.stSelectbox > div > div > select,
-.stTextarea > div > div > textarea {
+.stTextInput > div > div > input {
     border-radius: 30px !important;
     border: 2px solid #ffb6c1 !important;
     padding: 15px 20px !important;
@@ -230,19 +209,9 @@ st.markdown("""
 }
 
 /* Placeholder text */
-.stTextInput input::placeholder,
-.stSelectbox select::placeholder,
-.stTextarea textarea::placeholder {
+.stTextInput input::placeholder {
     color: #999999 !important;
     opacity: 1 !important;
-}
-
-.stSelectbox > div > div > select {
-    border-radius: 30px !important;
-    border: 2px solid #ffb6c1 !important;
-    padding: 15px 20px !important;
-    font-size: 16px !important;
-    background-color: white !important;
 }
 
 .stCheckbox {
@@ -272,7 +241,7 @@ st.markdown("""
 }
 
 /* Special style for add button */
-div[data-testid="column"]:nth-of-type(4) .stButton > button {
+div[data-testid="column"]:nth-of-type(3) .stButton > button {
     background: linear-gradient(135deg, #98fb98 0%, #7ccd7c 100%) !important;
     padding: 15px 20px !important;
     font-size: 18px !important;
@@ -315,17 +284,6 @@ div[data-testid="column"]:nth-of-type(4) .stButton > button {
 
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(135deg, #ff9eb5 0%, #ff8da1 100%);
-}
-
-/* Priority badges with full text */
-.priority-badge {
-    display: inline-block;
-    padding: 5px 15px;
-    border-radius: 30px;
-    font-size: 14px;
-    font-weight: 600;
-    margin-left: 10px;
-    color: #2d2d2d;
 }
 
 /* Emoji decorations */
@@ -419,8 +377,7 @@ div[data-testid="column"]:nth-of-type(4) .stButton > button {
     }
     
     /* Input fields - maximum visibility */
-    .stTextInput > div > div > input,
-    .stSelectbox > div > div > select {
+    .stTextInput > div > div > input {
         background-color: #ffffff !important;
         border: 2px solid #ffb6c1 !important;
         color: #000000 !important;
@@ -448,15 +405,6 @@ div[data-testid="column"]:nth-of-type(4) .stButton > button {
         padding: 15px !important;
         box-shadow: none !important;
         border-radius: 30px !important;
-    }
-    
-    /* Priority badges on mobile */
-    .priority-badge {
-        background-color: #f0f0f0 !important;
-        color: #000000 !important;
-        font-size: 12px !important;
-        border: 1px solid #dddddd !important;
-        padding: 3px 10px !important;
     }
     
     /* Flower decorations */
@@ -499,55 +447,30 @@ div[data-testid="column"]:nth-of-type(4) .stButton > button {
     }
     
     /* Add task button */
-    div[data-testid="column"]:nth-of-type(4) .stButton > button {
+    div[data-testid="column"]:nth-of-type(3) .stButton > button {
         font-size: 16px !important;
         padding: 12px !important;
         margin-top: 0 !important;
     }
     
-    /* Fix column stacking */
+    /* Fix column stacking for 3 columns */
     .css-1r6slb0, [data-testid="column"] {
         flex-wrap: wrap !important;
         margin-bottom: 10px !important;
     }
-            
-    /* Priority dropdown options */
-    .stSelectbox select option {
-        color: #ffffff !important;
-        font-weight: 500 !important;
-    }
-
-    .stSelectbox select option[value="High Proiority"] {
-        background-color: #ff6b6b !important;  /* Red for high */
-        color: #ffffff !important;
-    }
-
-    .stSelectbox select option[value="Medium Priority"] {
-        background-color: #ffb347 !important;  /* Orange for medium */
-        color: #ffffff !important;
-    }
-
-    .stSelectbox select option[value="Low Priority"] {
-        background-color: #6b8e6b !important;  /* Green for low */
-        color: #ffffff !important;
-    }  
-    /* Hide priority dropdown on mobile */
-    div[data-testid="column"]:nth-of-type(2) {
-        display: none !important;
-    }
-
-    /* Adjust the remaining columns to fill space */
+    
+    /* Adjust column widths for 3 columns */
     div[data-testid="column"]:nth-of-type(1) {
         width: 60% !important;
+    }
+
+    div[data-testid="column"]:nth-of-type(2) {
+        width: 20% !important;
     }
 
     div[data-testid="column"]:nth-of-type(3) {
         width: 20% !important;
     }
-
-    div[data-testid="column"]:nth-of-type(4) {
-        width: 20% !important;
-    }       
     
     /* Remove all animations and shadows */
     * {
@@ -580,12 +503,6 @@ div[data-testid="column"]:nth-of-type(4) .stButton > button {
     
     .section-title {
         font-size: 20px !important;
-    }
-    
-    .priority-badge {
-        font-size: 10px !important;
-        padding: 2px 6px !important;
-        margin-left: 5px !important;
     }
 }
 </style>
@@ -621,7 +538,7 @@ if st.session_state.user_name:
     )
 
 # ----------------------------
-# Add new task - Fixed alignment
+# Add new task - Fixed alignment (NO PRIORITY)
 # ----------------------------
 if st.session_state.user_name:
     st.markdown('<div class="section-title">✨ Add a New Task ✨</div>', unsafe_allow_html=True)
@@ -629,8 +546,8 @@ if st.session_state.user_name:
     with st.container():
         st.markdown('<div class="add-task-container">', unsafe_allow_html=True)
         
-        # Fixed column ratios for better alignment
-        col1, col2, col3, col4 = st.columns([3, 1.2, 1, 0.8])
+        # Fixed column ratios for better alignment (3 columns now)
+        col1, col2, col3 = st.columns([3, 1, 1])
         
         with col1:
             task_input = st.text_input("📝 What needs to be done?", 
@@ -639,15 +556,9 @@ if st.session_state.user_name:
                                       label_visibility="collapsed")
         
         with col2:
-            priority = st.selectbox("🎯 Priority", 
-                                   ["High Priority", "Medium Priority", "Low Priority"], 
-                                   key="priority_input",
-                                   label_visibility="collapsed")
-        
-        with col3:
             pinned = st.checkbox("📌 Pin this task", key="pin_input")
         
-        with col4:
+        with col3:
             # Add button aligned with inputs
             st.write("")  # Spacing for alignment
             add_clicked = st.button("➕ Add", use_container_width=True, key="add_button")
@@ -657,8 +568,8 @@ if st.session_state.user_name:
     if add_clicked:
         if task_input.strip():
             c.execute(
-                "INSERT INTO tasks (user_name, task, priority, pinned, completed) VALUES (?, ?, ?, ?, ?)",
-                (st.session_state.user_name, task_input.strip(), priority, int(pinned), 0)
+                "INSERT INTO tasks (user_name, task, pinned, completed) VALUES (?, ?, ?, ?)",
+                (st.session_state.user_name, task_input.strip(), int(pinned), 0)
             )
             conn.commit()
             st.rerun()
@@ -706,7 +617,7 @@ if st.session_state.user_name:
     st.markdown('<div class="flower-decoration">💫 ✨ 💫</div>', unsafe_allow_html=True)
 
     # ----------------------------
-    # Show tasks
+    # Show tasks (NO PRIORITY DISPLAY)
     # ----------------------------
     st.markdown('<div class="section-title">📋 Your Tasks</div>', unsafe_allow_html=True)
     
@@ -718,7 +629,6 @@ if st.session_state.user_name:
 
             card_class = "task-card pinned-task" if task["pinned"] else "task-card"
             pin_mark = "📌 " if task["pinned"] else ""
-            priority_mark = priority_symbol(task["priority"])
             
             status_emoji = "✅" if task["completed"] else "⏳"
             status_text = "Completed" if task["completed"] else "Pending"
@@ -732,10 +642,7 @@ if st.session_state.user_name:
                 st.markdown(
                     f"""
                     <div class="task-text" style="{task_style}">
-                        {pin_mark}{priority_mark} {task['task']}
-                        <span class="priority-badge" style="background-color: {priority_color(task['priority'])}">
-                            {task['priority']} Priority
-                        </span>
+                        {pin_mark} {task['task']}
                     </div>
                     <div class="small-text">
                         {status_emoji} {status_text}
