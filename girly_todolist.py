@@ -101,11 +101,14 @@ def load_tasks(user_name):
     return tasks
 
 # ----------------------------
-# Custom CSS - Girly Edition
+# Custom CSS - Girly Edition + Mobile Friendly
 # ----------------------------
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+/* Viewport for mobile */
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
 
 .stApp {
     background: linear-gradient(135deg, #fff5f7 0%, #ffe4e9 100%);
@@ -115,7 +118,7 @@ st.markdown("""
 .main-title {
     font-size: 54px;
     font-weight: 700;
-    color: #d44e6c;  /* Vibrant pink that stands out */
+    color: #d44e6c;
     margin-bottom: 30px;
     text-align: center;
     text-shadow: 3px 3px 6px rgba(255, 255, 255, 0.8);
@@ -214,13 +217,26 @@ st.markdown("""
     font-weight: 400;
 }
 
-.stTextInput > div > div > input {
+/* Input fields - FIXED for mobile visibility */
+.stTextInput > div > div > input,
+.stSelectbox > div > div > select,
+.stTextarea > div > div > textarea {
     border-radius: 30px !important;
     border: 2px solid #ffb6c1 !important;
     padding: 15px 20px !important;
     font-size: 18px !important;
     background-color: white !important;
     font-family: 'Quicksand', sans-serif !important;
+    color: #333333 !important;  /* Dark gray for visibility */
+    -webkit-text-fill-color: #333333 !important;  /* For iOS */
+}
+
+/* Placeholder text */
+.stTextInput input::placeholder,
+.stSelectbox select::placeholder,
+.stTextarea textarea::placeholder {
+    color: #999999 !important;
+    opacity: 1 !important;
 }
 
 .stSelectbox > div > div > select {
@@ -304,7 +320,7 @@ div[data-testid="column"]:nth-of-type(4) .stButton > button {
     background: linear-gradient(135deg, #ff9eb5 0%, #ff8da1 100%);
 }
 
-/* Priority badges */
+/* Priority badges with full text */
 .priority-badge {
     display: inline-block;
     padding: 5px 15px;
@@ -321,6 +337,163 @@ div[data-testid="column"]:nth-of-type(4) .stButton > button {
     font-size: 24px;
     margin: 10px 0;
     opacity: 0.7;
+}
+
+/* ===== MOBILE RESPONSIVE FIXES ===== */
+@media only screen and (max-width: 768px) {
+    .main-title {
+        font-size: 36px !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .greet-box {
+        font-size: 18px !important;
+        padding: 15px 20px !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .task-card {
+        padding: 15px 20px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .task-text {
+        font-size: 18px !important;
+    }
+    
+    .small-text {
+        font-size: 14px !important;
+    }
+    
+    .metric-pill {
+        font-size: 16px !important;
+        padding: 10px !important;
+        min-width: 80px !important;
+    }
+    
+    .add-task-container {
+        padding: 15px !important;
+    }
+    
+    .section-title {
+        font-size: 24px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    /* Force ALL text to be dark and visible on mobile */
+    .stTextInput > div > div > input,
+    .stSelectbox > div > div > select,
+    .stTextarea > div > div > textarea,
+    .stMarkdown,
+    p, span, div, label {
+        color: #333333 !important;
+        -webkit-text-fill-color: #333333 !important;
+    }
+    
+    /* Keep button text white though */
+    .stButton > button,
+    .stButton > button span {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+    }
+    
+    /* Input fields - extra mobile fixes */
+    .stTextInput input, 
+    .stSelectbox select, 
+    .stTextarea textarea {
+        font-size: 16px !important;  /* Prevents zoom on iOS */
+        color: #000000 !important;
+        background-color: #ffffff !important;
+        border: 2px solid #ffb6c1 !important;
+    }
+    
+    /* Make buttons bigger and easier to tap */
+    .stButton > button {
+        padding: 15px 20px !important;
+        font-size: 16px !important;
+        min-height: 50px !important;
+        width: 100% !important;
+        margin: 5px 0 !important;
+    }
+    
+    /* Better spacing for stacked columns */
+    .row-widget.stButton {
+        margin-bottom: 10px !important;
+    }
+    
+    /* Fix column stacking */
+    .css-1r6slb0, [data-testid="column"] {
+        flex-wrap: wrap !important;
+        margin-bottom: 10px !important;
+    }
+    
+    /* Make checkbox labels visible */
+    .stCheckbox label {
+        color: #b45f6b !important;
+        font-size: 16px !important;
+    }
+    
+    /* Ensure dropdown options are visible */
+    .stSelectbox select option {
+        color: #000000 !important;
+        background-color: #ffffff !important;
+    }
+    
+    /* Fix for any white text issues */
+    * {
+        -webkit-text-size-adjust: 100%;
+    }
+    
+    /* Flower decorations smaller on mobile */
+    .flower-decoration {
+        font-size: 16px !important;
+    }
+    
+    /* Add task button specific */
+    div[data-testid="column"]:nth-of-type(4) .stButton > button {
+        font-size: 16px !important;
+        padding: 12px !important;
+    }
+    
+    /* Priority badge text on mobile */
+    .priority-badge {
+        font-size: 12px !important;
+        padding: 3px 10px !important;
+    }
+}
+
+/* Extra small devices (very small phones) */
+@media only screen and (max-width: 480px) {
+    .main-title {
+        font-size: 28px !important;
+    }
+    
+    .greet-box {
+        font-size: 16px !important;
+        padding: 12px 15px !important;
+    }
+    
+    .task-text {
+        font-size: 16px !important;
+    }
+    
+    .metric-pill {
+        font-size: 14px !important;
+        padding: 8px !important;
+        min-width: 70px !important;
+    }
+    
+    /* Stack buttons vertically on very small screens */
+    .stButton > button {
+        font-size: 14px !important;
+        padding: 12px !important;
+    }
+    
+    /* Priority badge on very small screens */
+    .priority-badge {
+        font-size: 10px !important;
+        padding: 2px 8px !important;
+    }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -374,7 +547,7 @@ if st.session_state.user_name:
         
         with col2:
             priority = st.selectbox("🎯 Priority", 
-                                   ["High Priority", "Medium Priority", "Low Priority"], 
+                                   ["High", "Medium", "Low"], 
                                    key="priority_input",
                                    label_visibility="collapsed")
         
@@ -468,7 +641,7 @@ if st.session_state.user_name:
                     <div class="task-text" style="{task_style}">
                         {pin_mark}{priority_mark} {task['task']}
                         <span class="priority-badge" style="background-color: {priority_color(task['priority'])}">
-                            {task['priority']}
+                            {task['priority']} Priority
                         </span>
                     </div>
                     <div class="small-text">
