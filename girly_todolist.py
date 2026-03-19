@@ -77,7 +77,7 @@ def sort_tasks(tasks):
         key=lambda x: (
             not x["pinned"],
             x["completed"],
-            priority_order[x["priority"]]
+            priority_order.get(x["priority"], 3)
         )
     )
 
